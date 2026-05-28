@@ -12,7 +12,7 @@ export default async function Home() {
   };
 
   try {
-    const baseUrl = process.env.BACKEND_URL || 'http://localhost:8000';
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
     const res = await fetch(`${baseUrl}/products`, { cache: 'no-store' });
 
     if (res.ok) {
