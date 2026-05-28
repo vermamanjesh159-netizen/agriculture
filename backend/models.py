@@ -40,6 +40,12 @@ class Order(Base):
     
     delivery = relationship("Delivery", back_populates="order", uselist=False)
 
+    @property
+    def customer_name(self):
+        if self.shipping_address and isinstance(self.shipping_address, dict):
+            return self.shipping_address.get("customer_name")
+        return None
+
 class Delivery(Base):
     __tablename__ = "deliveries"
     id = Column(Integer, primary_key=True, index=True)

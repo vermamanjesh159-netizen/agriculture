@@ -27,7 +27,7 @@ export default function AdminOrdersPage() {
     fetchAllOrders();
   }, []);
 
-  const updateStatus = async (orderId: int, newStatus: string) => {
+  const updateStatus = async (orderId: number, newStatus: string) => {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
       await fetch(`${apiUrl}/orders/${orderId}/status?status=${newStatus}`, { method: 'POST' });
@@ -62,7 +62,7 @@ export default function AdminOrdersPage() {
                     <div style={{ fontWeight: 600 }}>{order.customer_name}</div>
                     <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{order.customer_email}</div>
                   </td>
-                  <td style={{ padding: '1.25rem' }}>₹{order.grand_total.toLocaleString()}</td>
+                  <td style={{ padding: '1.25rem' }}>₹{order.total_amount.toLocaleString()}</td>
                   <td style={{ padding: '1.25rem' }}>
                     <span style={{ 
                       padding: '0.25rem 0.75rem', 

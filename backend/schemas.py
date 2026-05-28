@@ -73,6 +73,7 @@ class DeliverySchema(BaseModel):
 class OrderSchema(BaseModel):
     id: int
     customer_email: str
+    customer_name: Optional[str] = None
     items: List[Dict[str, Any]]
     subtotal: Optional[float] = 0.0
     shipping_charges: Optional[float] = 50.0

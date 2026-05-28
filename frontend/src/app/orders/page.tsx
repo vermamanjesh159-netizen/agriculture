@@ -92,7 +92,7 @@ export default function OrdersPage() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2rem' }}>
                       <div>
                         <span style={{ color: '#64748b', fontSize: '0.9rem' }}>Order ID: #{order.id}</span>
-                        <h2 style={{ fontSize: '1.75rem', fontWeight: 'bold', margin: '0.25rem 0' }}>₹{order.grand_total}</h2>
+                        <h2 style={{ fontSize: '1.75rem', fontWeight: 'bold', margin: '0.25rem 0' }}>₹{order.total_amount}</h2>
                         <p style={{ color: '#10b981', fontWeight: 600, fontSize: '0.9rem' }}>
                           Estimated Delivery: {getEstimatedDelivery(order.created_at)}
                         </p>

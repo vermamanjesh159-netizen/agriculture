@@ -1,7 +1,7 @@
 # Dependency directories
 node_modules/
 frontend/node_modules/
-services/venv/
+backend/venv/
 
 # Next.js build output
 .next/

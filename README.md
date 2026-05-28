@@ -18,7 +18,7 @@ graph TD
 
 ### Key Components:
 1. **Frontend (`/frontend`)**: A high-performance web application built with **Next.js 15 (React)**. Features responsive catalog browsing, customer profiles, shopping cart, custom Stripe payment integration, and a conversational AI assistant.
-2. **Backend (`/services`)**: A modular API service built using **FastAPI (Python)**. Deals with product catalogs, authentication via JWT tokens, order management, and secure Stripe checkouts.
+2. **Backend (`/backend`)**: A modular API service built using **FastAPI (Python)**. Deals with product catalogs, authentication via JWT tokens, order management, and secure Stripe checkouts.
 3. **Database**: A containerized **PostgreSQL 15** database managed via SQLAlchemy models and Alembic migrations.
 
 ---
@@ -97,10 +97,10 @@ If you prefer to run the services individually without Docker:
 Ensure you have a PostgreSQL server running locally, create a database named `agriculture`, and update the `DATABASE_URL` in `.env`.
 
 ### 2. Backend (FastAPI Services)
-Navigate to the services directory, set up a virtual environment, and install dependencies:
+Navigate to the backend directory, set up a virtual environment, and install dependencies:
 
 ```bash
-cd services
+cd backend
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt

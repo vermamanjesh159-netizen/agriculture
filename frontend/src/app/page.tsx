@@ -18,7 +18,7 @@ export default async function Home() {
     if (res.ok) {
       const allProducts = await res.json();
       allProducts.forEach((p: any) => {
-        const catName = p.category?.name;
+        const catName = p.category;
         if (categorizedProducts[catName]) {
           categorizedProducts[catName].push(p);
         }

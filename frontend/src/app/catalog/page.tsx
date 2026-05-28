@@ -40,7 +40,7 @@ export default function CatalogPage() {
 
   const filteredProducts = activeCategory === 'All' 
     ? products 
-    : products.filter(p => p.category?.name === activeCategory);
+    : products.filter(p => p.category === activeCategory);
 
   return (
     <main style={{ minHeight: '100vh', background: '#f8fafc' }}>

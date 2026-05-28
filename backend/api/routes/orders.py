@@ -37,6 +37,9 @@ async def initiate_checkout(order_data: schemas.OrderCreate, db: Session = Depen
 
     try:
         # 1. Create Order
+        shipping_addr = order_data.shipping_address.model_dump()
+        shipping_addr["customer_name"] = order_data.customer_name
+
         new_order = models.Order(
             customer_email=order_data.customer_email,
             items=items_json,
@@ -44,7 +47,7 @@ async def initiate_checkout(order_data: schemas.OrderCreate, db: Session = Depen
             shipping_charges=shipping_charges,
             tax=tax,
             total_amount=grand_total,
-            shipping_address=order_data.shipping_address.model_dump(),
+            shipping_address=shipping_addr,
             payment_status="Pending"
         )
         db.add(new_order)
