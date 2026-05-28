@@ -43,7 +43,7 @@ export default function CatalogPage() {
     : products.filter(p => p.category === activeCategory);
 
   return (
-    <main style={{ minHeight: '100vh', background: '#f8fafc' }}>
+    <main style={{ minHeight: '100vh', background: 'var(--background)' }}>
       <Navbar />
       
       <div style={{ maxWidth: '1200px', margin: '8rem auto 4rem', padding: '0 2rem' }}>

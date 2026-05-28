@@ -13,7 +13,7 @@ export default function SuccessPage() {
   }, []);
 
   return (
-    <main style={{ minHeight: '100vh', background: '#f8fafc', display: 'flex', flexDirection: 'column' }}>
+    <main style={{ minHeight: '100vh', background: 'var(--background)', display: 'flex', flexDirection: 'column' }}>
       <Navbar />
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}>
         <div className="glass-card" style={{ maxWidth: '600px', width: '100%', padding: '4rem', textAlign: 'center', borderRadius: '32px' }}>

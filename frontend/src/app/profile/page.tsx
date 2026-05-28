@@ -38,13 +38,13 @@ export default function ProfilePage() {
   }, [token]);
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', background: '#f8fafc' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', background: 'var(--background)' }}>
       <div className="spinner-large" />
     </div>
   );
 
   return (
-    <main style={{ minHeight: '100vh', background: '#f8fafc' }}>
+    <main style={{ minHeight: '100vh', background: 'var(--background)' }}>
       <Navbar />
       <div style={{ maxWidth: '800px', margin: '8rem auto 4rem', padding: '0 2rem' }}>
         <div className="glass-card" style={{ padding: '3rem', borderRadius: '32px' }}>

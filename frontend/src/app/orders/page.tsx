@@ -54,7 +54,7 @@ export default function OrdersPage() {
   };
 
   return (
-    <main style={{ minHeight: '100vh', background: '#f8fafc' }}>
+    <main style={{ minHeight: '100vh', background: 'var(--background)' }}>
       <Navbar />
       <div style={{ maxWidth: '1000px', margin: '8rem auto 4rem', padding: '0 2rem' }}>
         <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '2rem' }}>Track Your Orders</h1>

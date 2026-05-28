@@ -127,7 +127,7 @@ export default function EditProductPage() {
   if (fetching) return <div style={{ padding: '10rem', textAlign: 'center' }}>Loading product data...</div>;
 
   return (
-    <main style={{ minHeight: '100vh', paddingBottom: '4rem', background: '#f8fafc' }}>
+    <main style={{ minHeight: '100vh', paddingBottom: '4rem', background: 'var(--background)' }}>
       <Navbar />
       
       <div style={{ maxWidth: '800px', margin: '8rem auto 2rem', padding: '2rem' }}>

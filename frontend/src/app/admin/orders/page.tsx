@@ -38,7 +38,7 @@ export default function AdminOrdersPage() {
   };
 
   return (
-    <main style={{ minHeight: '100vh', background: '#f8fafc', paddingBottom: '4rem' }}>
+    <main style={{ minHeight: '100vh', background: 'var(--background)', paddingBottom: '4rem' }}>
       <Navbar />
       <div style={{ maxWidth: '1200px', margin: '8rem auto 2rem', padding: '0 2rem' }}>
         <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '2rem' }}>Admin: Manage Orders</h1>

@@ -44,12 +44,12 @@ export default function SignupPage() {
   };
 
   return (
-    <main style={{ minHeight: '100vh', background: '#f8fafc' }}>
+    <main style={{ minHeight: '100vh', background: 'var(--background)' }}>
       <Navbar />
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '2rem' }}>
         <div className="glass-card" style={{ maxWidth: '450px', width: '100%', padding: '3rem', borderRadius: '32px' }}>
           <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem', textAlign: 'center' }}>Create Account</h1>
-          <p style={{ textAlign: 'center', color: '#64748b', marginBottom: '2.5rem' }}>Join the AgriFeed community</p>
+          <p style={{ textAlign: 'center', color: 'var(--foreground)', opacity: 0.7, marginBottom: '2.5rem' }}>Join the AgriFeed community</p>
 
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
             <div>
@@ -99,8 +99,8 @@ export default function SignupPage() {
             </button>
           </form>
 
-          <p style={{ textAlign: 'center', marginTop: '2rem', color: '#64748b' }}>
-            Already have an account? <Link href="/login" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>Log In</Link>
+          <p style={{ textAlign: 'center', marginTop: '2rem', color: 'var(--foreground)', opacity: 0.7 }}>
+            Already have an account? <Link href="/login" style={{ color: 'var(--primary-light)', fontWeight: 700, textDecoration: 'none' }}>Log In</Link>
           </p>
         </div>
       </div>
