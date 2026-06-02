@@ -93,3 +93,44 @@ class PaymentIntentCreate(BaseModel):
 class PaymentIntentResponse(BaseModel):
     client_secret: str
     payment_intent_id: str
+
+
+# Health Check Schemas
+class DatabaseHealthSchema(BaseModel):
+    status: str
+    latency_ms: Optional[float] = None
+    error: Optional[str] = None
+
+class StripeHealthSchema(BaseModel):
+    status: str
+    latency_ms: Optional[float] = None
+    error: Optional[str] = None
+
+class SystemResourceSchema(BaseModel):
+    cpu_cores: Optional[int] = None
+    cpu_usage_percent: Optional[float] = None
+    load_averages: Optional[List[float]] = None
+    memory_total_bytes: Optional[int] = None
+    memory_available_bytes: Optional[int] = None
+    memory_used_bytes: Optional[int] = None
+    memory_used_percent: Optional[float] = None
+    disk_total_bytes: Optional[int] = None
+    disk_free_bytes: Optional[int] = None
+    disk_used_bytes: Optional[int] = None
+    disk_used_percent: Optional[float] = None
+    os_name: str
+    os_release: str
+    python_version: str
+
+class DependencyHealthSchema(BaseModel):
+    status: str
+    version: Optional[str] = None
+
+class HealthCheckResponse(BaseModel):
+    status: str
+    timestamp: str
+    uptime_seconds: float
+    components: Dict[str, Any]
+    system: SystemResourceSchema
+    dependencies: Dict[str, DependencyHealthSchema]
+
