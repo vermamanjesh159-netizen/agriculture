@@ -46,7 +46,7 @@ async def signup(user_data: UserCreate, db: Session = Depends(get_db)):
         full_name=user_data.full_name,
         email=user_data.email,
         hashed_password=hashed_pwd,
-        is_admin=user_data.is_admin
+        is_admin=user_data.register_as_admin
     )
     db.add(new_user)
     db.commit()

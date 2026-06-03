@@ -28,7 +28,7 @@ export default function SignupPage() {
           full_name: fullName, 
           email, 
           password,
-          is_admin: isAdmin
+          register_as_admin: isAdmin
         }),
       });
 
