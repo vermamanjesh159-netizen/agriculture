@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
+import { getApiUrl } from '@/config';
 
 export default function EditProductPage() {
   const { id } = useParams();
@@ -26,7 +27,7 @@ export default function EditProductPage() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        const apiUrl = getApiUrl();
         const res = await fetch(`${apiUrl}/products/${id}`);
         if (res.ok) {
           const data = await res.json();
@@ -71,7 +72,7 @@ export default function EditProductPage() {
     setMessage('');
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const apiUrl = getApiUrl();
       let currentImageUrl = formData.image_url;
 
       // 1. Upload new image if selected
@@ -166,7 +167,7 @@ export default function EditProductPage() {
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+            <div className="form-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
               <div className="form-group">
                 <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>Product Name</label>
                 <input 
@@ -194,7 +195,7 @@ export default function EditProductPage() {
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
+            <div className="form-grid-3" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
               <div className="form-group">
                 <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>Price (₹)</label>
                 <input 
@@ -255,6 +256,14 @@ export default function EditProductPage() {
           </form>
         </div>
       </div>
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .form-grid-2, .form-grid-3 {
+            grid-template-columns: 1fr !important;
+            gap: 1.25rem !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }

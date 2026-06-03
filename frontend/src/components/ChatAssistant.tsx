@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import { getApiUrl } from '@/config';
 
 interface Message {
   id: number;
@@ -29,7 +30,7 @@ export default function ChatAssistant() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        const apiUrl = getApiUrl();
         const res = await fetch(`${apiUrl}/products`);
         if (res.ok) {
           const data = await res.json();
@@ -196,7 +197,7 @@ export default function ChatAssistant() {
                   <div style={{ marginTop: '0.75rem', padding: '0.5rem', background: 'white', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
                     <div style={{ height: '80px', background: '#f8fafc', borderRadius: '8px', marginBottom: '0.5rem', overflow: 'hidden' }}>
                       <img 
-                        src={msg.product.image_url ? `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${msg.product.image_url}` : `https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=200`} 
+                        src={msg.product.image_url ? `${getApiUrl()}${msg.product.image_url}` : `/robotic_feed_making.png`} 
                         alt={msg.product.name} 
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       />

@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import Navbar from '@/components/Navbar';
 
+import { getApiUrl } from '@/config';
+
 export default function ProfilePage() {
   const { user, token, logout } = useAuth();
   const [profileData, setProfileData] = useState<any>(null);
@@ -17,7 +19,7 @@ export default function ProfilePage() {
 
     const fetchProfile = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        const apiUrl = getApiUrl();
         const res = await fetch(`${apiUrl}/auth/me`, {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -48,7 +50,7 @@ export default function ProfilePage() {
       <Navbar />
       <div style={{ maxWidth: '800px', margin: '8rem auto 4rem', padding: '0 2rem' }}>
         <div className="glass-card" style={{ padding: '3rem', borderRadius: '32px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '3rem' }}>
+          <div className="profile-header" style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '3rem' }}>
             <div style={{ 
               width: '100px', 
               height: '100px', 
@@ -86,7 +88,7 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          <div style={{ marginTop: '3rem', display: 'flex', gap: '1rem' }}>
+          <div className="profile-buttons" style={{ marginTop: '3rem', display: 'flex', gap: '1rem' }}>
             <button onClick={() => window.location.href = '/orders'} className="btn-primary" style={{ padding: '1rem 2rem' }}>View Order History</button>
             <button onClick={logout} style={{ padding: '1rem 2rem', background: 'white', border: '1px solid #fee2e2', color: '#991b1b', borderRadius: '12px', fontWeight: 600, cursor: 'pointer' }}>Sign Out</button>
           </div>
@@ -104,6 +106,23 @@ export default function ProfilePage() {
         @keyframes spin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
+        }
+        @media (max-width: 768px) {
+          .profile-header {
+            flex-direction: column !important;
+            text-align: center !important;
+            gap: 1.25rem !important;
+          }
+          .profile-header h1 {
+            font-size: 1.75rem !important;
+          }
+          .profile-buttons {
+            flex-direction: column !important;
+            gap: 1rem !important;
+          }
+          .profile-buttons button {
+            width: 100% !important;
+          }
         }
       `}</style>
     </main>

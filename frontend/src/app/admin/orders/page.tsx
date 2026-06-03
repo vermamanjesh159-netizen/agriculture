@@ -3,13 +3,15 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 
+import { getApiUrl } from '@/config';
+
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchAllOrders = async () => {
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const apiUrl = getApiUrl();
       // In a real app, this would be a protected /admin/orders endpoint
       // For now, we'll fetch all if we had an endpoint, or just search by a common mock email
       const res = await fetch(`${apiUrl}/my-orders?email=admin@example.com`); 
@@ -29,7 +31,7 @@ export default function AdminOrdersPage() {
 
   const updateStatus = async (orderId: number, newStatus: string) => {
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const apiUrl = getApiUrl();
       await fetch(`${apiUrl}/orders/${orderId}/status?status=${newStatus}`, { method: 'POST' });
       fetchAllOrders();
     } catch (err) {
@@ -44,7 +46,8 @@ export default function AdminOrdersPage() {
         <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '2rem' }}>Admin: Manage Orders</h1>
         
         <div className="glass-card" style={{ padding: '0', borderRadius: '24px', overflow: 'hidden' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <div className="table-responsive" style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '600px' }}>
             <thead style={{ background: '#f1f5f9' }}>
               <tr>
                 <th style={{ padding: '1.25rem', textAlign: 'left' }}>Order ID</th>
@@ -90,6 +93,7 @@ export default function AdminOrdersPage() {
               ))}
             </tbody>
           </table>
+          </div>
           {orders.length === 0 && (
             <div style={{ padding: '4rem', textAlign: 'center', color: '#64748b' }}>No orders to display.</div>
           )}

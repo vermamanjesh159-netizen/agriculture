@@ -7,6 +7,7 @@ type CartItem = {
   name: string;
   price: number;
   quantity: number;
+  image_url?: string;
 };
 
 type CartContextType = {
@@ -49,7 +50,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       }
-      return [...prev, { id: product.id, name: product.name, price: product.price, quantity: 1 }];
+      return [...prev, { id: product.id, name: product.name, price: product.price, quantity: 1, image_url: product.image_url }];
     });
     setCartOpen(true); // Open cart automatically when adding
   };

@@ -4,14 +4,26 @@ import React, { useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
+import { getApiUrl } from '@/config';
 
-export default function ProductList({ initialProducts }: { initialProducts: any[] }) {
+export default function ProductList({ 
+  initialProducts, 
+  showFilters = true 
+}: { 
+  initialProducts: any[]; 
+  showFilters?: boolean; 
+}) {
   const { addToCart } = useCart();
   const { user } = useAuth();
   const [products, setProducts] = useState(initialProducts);
   const [filter, setFilter] = useState('All');
 
   useEffect(() => {
+    if (!showFilters) {
+      setProducts(initialProducts);
+      return;
+    }
+
     if (filter === 'All') {
       setProducts(initialProducts);
     } else {
@@ -19,7 +31,7 @@ export default function ProductList({ initialProducts }: { initialProducts: any[
       // For now, we'll filter locally or fetch based on filter change
       const fetchFiltered = async () => {
         try {
-          const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+          const apiUrl = getApiUrl();
           const res = await fetch(`${apiUrl}/products?category=${filter}`);
           if (res.ok) {
             const data = await res.json();
@@ -31,7 +43,7 @@ export default function ProductList({ initialProducts }: { initialProducts: any[
       };
       fetchFiltered();
     }
-  }, [filter, initialProducts]);
+  }, [filter, initialProducts, showFilters]);
 
   const formatPrice = (p: number) => `₹${p.toLocaleString()}`;
 
@@ -64,28 +76,30 @@ export default function ProductList({ initialProducts }: { initialProducts: any[
         </div>
       )}
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: '2rem', color: 'var(--primary)' }}>{filter} Products</h2>
-        <div style={{ display: 'flex', gap: '1rem' }}>
-          {['All', 'Concentrates', 'Roughages', 'Supplements', 'Aqua Feed'].map((f) => (
-            <button 
-              key={f} 
-              onClick={() => setFilter(f)}
-              style={{
-                padding: '0.5rem 1rem',
-                borderRadius: '20px',
-                border: '1px solid var(--primary)',
-                background: filter === f ? 'var(--primary)' : 'transparent',
-                color: filter === f ? 'white' : 'var(--primary)',
-                cursor: 'pointer',
-                fontWeight: 600
-              }}
-            >
-              {f}
-            </button>
-          ))}
+      {showFilters && (
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+          <h2 style={{ fontSize: '2rem', color: 'var(--primary)' }}>{filter} Products</h2>
+          <div style={{ display: 'flex', gap: '1rem' }}>
+            {['All', 'Concentrates', 'Roughages', 'Supplements', 'Aqua Feed'].map((f) => (
+              <button 
+                key={f} 
+                onClick={() => setFilter(f)}
+                style={{
+                  padding: '0.5rem 1rem',
+                  borderRadius: '20px',
+                  border: '1px solid var(--primary)',
+                  background: filter === f ? 'var(--primary)' : 'transparent',
+                  color: filter === f ? 'white' : 'var(--primary)',
+                  cursor: 'pointer',
+                  fontWeight: 600
+                }}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
       
       <div style={{
         display: 'grid',
@@ -96,7 +110,7 @@ export default function ProductList({ initialProducts }: { initialProducts: any[
           <div key={product.id} className="glass-card product-card" style={{ overflow: 'hidden' }}>
             <div style={{ height: '200px', background: '#ddd', position: 'relative' }}>
               <img 
-                src={product.image_url ? `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${product.image_url}` : `https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=800&sig=${product.id}`} 
+                src={product.image_url ? `${getApiUrl()}${product.image_url}` : `/robotic_feed_making.png`} 
                 alt={product.name} 
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />

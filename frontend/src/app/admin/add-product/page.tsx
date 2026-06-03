@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 
+import { getApiUrl } from '@/config';
+
 export default function AddProductPage() {
   const [formData, setFormData] = useState({
     name: '',
@@ -36,7 +38,7 @@ export default function AddProductPage() {
     setMessage('');
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const apiUrl = getApiUrl();
       let uploadedImageUrl = null;
 
       // 1. Upload Image if selected
@@ -144,7 +146,7 @@ export default function AddProductPage() {
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+            <div className="form-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
               <div className="form-group">
                 <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>Product Name</label>
                 <input 
@@ -172,7 +174,7 @@ export default function AddProductPage() {
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
+            <div className="form-grid-3" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
               <div className="form-group">
                 <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>Price (₹)</label>
                 <input 
@@ -210,7 +212,7 @@ export default function AddProductPage() {
 
             <div style={{ padding: '1.5rem', background: '#f1f5f9', borderRadius: '16px', marginTop: '1rem' }}>
               <h3 style={{ marginBottom: '1rem', fontSize: '1.1rem', color: '#64748b' }}>Attributes (JSON)</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+              <div className="form-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                 <div className="form-group">
                   <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Protein %</label>
                   <input 
@@ -259,6 +261,14 @@ export default function AddProductPage() {
           </form>
         </div>
       </div>
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .form-grid-2, .form-grid-3 {
+            grid-template-columns: 1fr !important;
+            gap: 1.25rem !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }

@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Hero() {
   return (
-    <section style={{
+    <section className="hero-section" style={{
       height: '85vh',
       display: 'flex',
       flexDirection: 'column',
@@ -27,36 +27,38 @@ export default function Hero() {
         zIndex: -1
       }}></div>
       
-      <h1 className="animate-fade-in" style={{
+      <h1 className="hero-title animate-fade-in" style={{
         fontSize: '4.5rem',
         fontWeight: '800',
         marginBottom: '1.5rem',
         color: '#2d4a22', // Dark earthy green
-        letterSpacing: '-0.02em'
+        letterSpacing: '-0.02em',
+        lineHeight: '1.1'
       }}>
         Premium Feed for Your <span style={{ color: '#8b5e3c' }}>Livestock</span>
       </h1>
       
-      <p className="animate-fade-in" style={{
+      <p className="hero-subtitle animate-fade-in" style={{
         fontSize: '1.4rem',
         maxWidth: '700px',
         marginBottom: '2.5rem',
         color: '#4a5568',
         lineHeight: '1.6'
       }}>
+        Digitized agricultural marketplace connecting you with nutrient-rich, lab-tested animal feed concentrates, roughages, and minerals.
       </p>
 
-      <div className="animate-fade-in" style={{ display: 'flex', gap: '1.5rem', marginBottom: '3rem' }}>
-        <button className="btn-custom-green" onClick={() => window.location.href='/catalog?category=Concentrates'}>
+      <div className="hero-buttons animate-fade-in" style={{ display: 'flex', gap: '1.5rem', marginBottom: '3rem' }}>
+        <button className="btn-custom-green animate-btn" onClick={() => window.location.href='/catalog?category=Concentrates'}>
           Browse Concentrates
         </button>
-        <button className="btn-custom-brown" onClick={() => window.location.href='/catalog?category=Roughages'}>
+        <button className="btn-custom-brown animate-btn" onClick={() => window.location.href='/catalog?category=Roughages'}>
           Explore Roughages
         </button>
       </div>
 
       {/* New CTA Benefit Lines */}
-      <div className="animate-fade-in" style={{ 
+      <div className="hero-benefits animate-fade-in" style={{ 
         display: 'flex', 
         gap: '2.5rem', 
         flexWrap: 'wrap', 
@@ -73,7 +75,7 @@ export default function Hero() {
           <span style={{ color: '#10b981' }}>✓</span> View Full Nutritional Profiles
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#2d4a22', fontWeight: 600 }}>
-          <span style={{ color: '#10b981' }}>✓</span> Calculate Your Bulk Order Savings
+          <span style={{ color: '#10b981' }}>✓</span> Calculate Your Bulk Savings
         </div>
       </div>
 
@@ -105,12 +107,48 @@ export default function Hero() {
         .btn-custom-green:hover, .btn-custom-brown:hover {
           transform: translateY(-2px);
         }
+        .animate-btn:active {
+          transform: translateY(0);
+        }
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-in {
           animation: fadeIn 0.8s ease forwards;
+        }
+
+        @media (max-width: 768px) {
+          .hero-section {
+            height: auto !important;
+            min-height: 80vh !important;
+            padding: 8rem 1.5rem 4rem !important;
+          }
+          .hero-title {
+            font-size: 2.25rem !important;
+            margin-bottom: 1.25rem !important;
+          }
+          .hero-subtitle {
+            font-size: 1.05rem !important;
+            margin-bottom: 2rem !important;
+          }
+          .hero-buttons {
+            flex-direction: column !important;
+            width: 100% !important;
+            gap: 1rem !important;
+            margin-bottom: 2.5rem !important;
+          }
+          .btn-custom-green, .btn-custom-brown {
+            width: 100% !important;
+            padding: 0.9rem !important;
+          }
+          .hero-benefits {
+            padding: 1.25rem !important;
+            border-radius: 24px !important;
+            gap: 1rem !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+          }
         }
       `}</style>
     </section>

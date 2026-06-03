@@ -2,8 +2,11 @@
 
 import React, { useState } from 'react';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
+import { getApiUrl } from '@/config';
 
 export default function CartDrawer() {
+  const { isAuthenticated } = useAuth();
   const { 
     cart, removeFromCart, updateQuantity, isCartOpen, setCartOpen,
     subtotal, shipping, tax, total, clearCart 
@@ -21,7 +24,7 @@ export default function CartDrawer() {
     phone: ''
   });
 
-  if (!isCartOpen) return null;
+  if (!isAuthenticated || !isCartOpen) return null;
 
   const handleCheckout = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,7 +49,7 @@ export default function CartDrawer() {
     };
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const apiUrl = getApiUrl();
       const res = await fetch(`${apiUrl}/initiate-checkout`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -102,7 +105,7 @@ export default function CartDrawer() {
                 {cart.map(item => (
                   <div key={item.id} style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                     <div style={{ width: '80px', height: '80px', background: '#f0f0f0', borderRadius: '8px', flexShrink: 0 }}>
-                      <img src={`https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=100&sig=${item.id}`} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
+                      <img src={item.image_url ? `${getApiUrl()}${item.image_url}` : `/robotic_feed_making.png`} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
                     </div>
                     <div style={{ flex: 1 }}>
                       <h4 style={{ margin: '0 0 0.25rem 0' }}>{item.name}</h4>

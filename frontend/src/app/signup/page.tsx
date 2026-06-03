@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
+import { getApiUrl } from '@/config';
 
 export default function SignupPage() {
   const [fullName, setFullName] = useState('');
@@ -18,7 +19,7 @@ export default function SignupPage() {
     setError(null);
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const apiUrl = getApiUrl();
       const res = await fetch(`${apiUrl}/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

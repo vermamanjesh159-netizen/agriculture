@@ -7,6 +7,8 @@ import { Elements } from '@stripe/react-stripe-js';
 import Navbar from '@/components/Navbar';
 import CheckoutForm from '@/components/CheckoutForm';
 
+import { getApiUrl } from '@/config';
+
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '');
 
 function CheckoutContent() {
@@ -27,7 +29,7 @@ function CheckoutContent() {
 
     const initCheckout = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        const apiUrl = getApiUrl();
         
         // 1. Fetch order details
         const orderRes = await fetch(`${apiUrl}/orders/${orderId}`);

@@ -3,17 +3,30 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import ProductList from '@/components/ProductList';
+import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
+import { getApiUrl } from '@/config';
 
 export default function CatalogPage() {
+  const { isAuthenticated } = useAuth();
+  const router = useRouter();
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      router.push('/login');
+    }
+  }, [isAuthenticated, router]);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
     const fetchData = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        const apiUrl = getApiUrl();
         
         // Fetch categories
         const catRes = await fetch(`${apiUrl}/products/categories`);
@@ -36,11 +49,37 @@ export default function CatalogPage() {
     };
 
     fetchData();
-  }, []);
+  }, [isAuthenticated]);
 
   const filteredProducts = activeCategory === 'All' 
     ? products 
     : products.filter(p => p.category === activeCategory);
+
+  if (!isAuthenticated) {
+    return (
+      <main style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'var(--background)' }}>
+        <div style={{ textAlign: 'center' }}>
+          <p style={{ fontSize: '1.2rem', fontWeight: 600, color: '#64748b', marginBottom: '1rem' }}>Redirecting to Login...</p>
+          <div className="spinner-large" />
+        </div>
+        <style jsx global>{`
+          .spinner-large {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+          }
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
+      </main>
+    );
+  }
 
   return (
     <main style={{ minHeight: '100vh', background: 'var(--background)' }}>
@@ -48,7 +87,7 @@ export default function CatalogPage() {
       
       <div style={{ maxWidth: '1200px', margin: '8rem auto 4rem', padding: '0 2rem' }}>
         <div style={{ marginBottom: '3rem', textAlign: 'center' }}>
-          <h1 style={{ fontSize: '3rem', fontWeight: '800', marginBottom: '1rem', background: 'linear-gradient(to right, #10b981, #3b82f6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          <h1 className="catalog-page-title" style={{ fontSize: '3rem', fontWeight: '800', marginBottom: '1rem', background: 'linear-gradient(to right, #10b981, #3b82f6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
             Agricultural Marketplace
           </h1>
           <p style={{ color: '#64748b', fontSize: '1.1rem' }}>Browse our wide range of premium feed and supplements.</p>
@@ -134,7 +173,7 @@ export default function CatalogPage() {
               <span style={{ color: '#94a3b8' }}>{filteredProducts.length} items found</span>
             </div>
             
-            <ProductList initialProducts={filteredProducts} />
+            <ProductList initialProducts={filteredProducts} showFilters={false} />
             
             {filteredProducts.length === 0 && (
               <div style={{ textAlign: 'center', padding: '6rem', background: 'white', borderRadius: '32px', border: '2px dashed #e2e8f0' }}>
@@ -158,6 +197,11 @@ export default function CatalogPage() {
         @keyframes spin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
+        }
+        @media (max-width: 768px) {
+          .catalog-page-title {
+            font-size: 2rem !important;
+          }
         }
       `}</style>
     </main>
