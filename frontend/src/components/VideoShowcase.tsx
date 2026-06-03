@@ -22,11 +22,11 @@ const showcases = [
 
 export default function VideoShowcase() {
   return (
-    <section style={{ padding: '6rem 2rem', background: '#f8fafc' }}>
+    <section style={{ padding: '6rem 2rem', background: 'var(--badge-bg)' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>Our Process & Impact</h2>
-          <p style={{ color: '#64748b', maxWidth: '600px', margin: '0 auto' }}>See how we combine technology and nature to deliver the best agricultural feed.</p>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--foreground)' }}>Our Process & Impact</h2>
+          <p style={{ color: 'var(--foreground)', opacity: 0.8, maxWidth: '600px', margin: '0 auto' }}>See how we combine technology and nature to deliver the best agricultural feed.</p>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
@@ -34,8 +34,9 @@ export default function VideoShowcase() {
             <div key={idx} className="glass-card" style={{ 
               borderRadius: '24px', 
               overflow: 'hidden', 
-              background: 'white',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+              background: 'var(--card-bg)',
+              border: '1px solid var(--glass-border)',
+              boxShadow: 'var(--shadow)',
               transition: 'transform 0.3s ease'
             }}>
               <div style={{ position: 'relative', height: '250px', overflow: 'hidden' }}>
@@ -62,8 +63,8 @@ export default function VideoShowcase() {
                 </div>
               </div>
               <div style={{ padding: '1.5rem' }}>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>{item.title}</h3>
-                <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.6' }}>{item.desc}</p>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '0.5rem', color: 'var(--foreground)' }}>{item.title}</h3>
+                <p style={{ color: 'var(--foreground)', opacity: 0.8, fontSize: '0.95rem', lineHeight: '1.6' }}>{item.desc}</p>
               </div>
             </div>
           ))}

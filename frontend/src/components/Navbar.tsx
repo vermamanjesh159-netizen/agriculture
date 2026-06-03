@@ -2,19 +2,37 @@
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const { cartCount, setCartOpen } = useCart();
   const { user, logout, isAuthenticated } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setTheme('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(nextTheme);
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    localStorage.setItem('theme', nextTheme);
+  };
 
   const isAuthPage = pathname === '/login' || pathname === '/signup';
 
   const handleCheckout = () => {
-    setCartOpen(true);
+    router.push('/cart');
   };
 
   return (
@@ -102,11 +120,11 @@ export default function Navbar() {
         {isAuthenticated && user?.email && (
           <div className="desktop-only user-email-chip" style={{
             fontSize: '0.8rem',
-            color: '#475569',
-            background: 'rgba(74, 140, 68, 0.08)',
+            color: 'var(--foreground)',
+            background: 'var(--badge-bg)',
             padding: '0.4rem 0.9rem',
             borderRadius: '99px',
-            border: '1px solid rgba(74, 140, 68, 0.15)',
+            border: '1px solid var(--glass-border)',
             display: 'flex',
             alignItems: 'center',
             gap: '0.4rem',
@@ -126,13 +144,13 @@ export default function Navbar() {
               alignItems: 'center', 
               gap: '0.5rem', 
               fontSize: '0.85rem',
-              background: 'white',
-              border: '1px solid rgba(0,0,0,0.06)',
+              background: 'var(--card-bg)',
+              border: '1px solid var(--glass-border)',
               borderRadius: '14px',
               cursor: 'pointer',
               fontWeight: 700,
-              color: '#334155',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
+              color: 'var(--foreground)',
+              boxShadow: 'var(--shadow)',
               position: 'relative',
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
             }} 
@@ -190,6 +208,46 @@ export default function Navbar() {
             Login
           </Link>
         )}
+
+        {/* Theme Toggle Button */}
+        <button 
+          onClick={toggleTheme}
+          aria-label="Toggle Theme"
+          style={{
+            background: 'var(--card-bg)',
+            border: '1px solid var(--glass-border)',
+            color: 'var(--foreground)',
+            padding: '0.5rem',
+            width: '38px',
+            height: '38px',
+            borderRadius: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            boxShadow: 'var(--shadow)',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+          }}
+          className="theme-toggle-btn"
+        >
+          {theme === 'light' ? (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          ) : (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          )}
+        </button>
       </div>
 
       {/* Mobile Menu Dropdown with Animations */}
@@ -199,10 +257,10 @@ export default function Navbar() {
           top: '115%',
           left: '0',
           width: '100%',
-          background: 'rgba(255, 255, 255, 0.98)',
+          background: 'var(--card-bg)',
           borderRadius: '24px',
-          border: '1px solid rgba(0,0,0,0.06)',
-          boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+          border: '1px solid var(--glass-border)',
+          boxShadow: 'var(--shadow)',
           padding: '1.5rem',
           display: 'flex',
           flexDirection: 'column',
@@ -215,11 +273,11 @@ export default function Navbar() {
           {isAuthenticated && user?.email && (
             <div style={{
               fontSize: '0.85rem',
-              color: '#334155',
-              background: 'rgba(74, 140, 68, 0.08)',
+              color: 'var(--foreground)',
+              background: 'var(--badge-bg)',
               padding: '0.6rem 1rem',
               borderRadius: '14px',
-              border: '1px solid rgba(74, 140, 68, 0.15)',
+              border: '1px solid var(--glass-border)',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',
@@ -230,13 +288,13 @@ export default function Navbar() {
               <span style={{ wordBreak: 'break-all' }}>{user.email}</span>
             </div>
           )}
-          <Link href="/" onClick={() => setIsMenuOpen(false)} style={{ textDecoration: 'none', color: '#1e293b', fontWeight: 600, padding: '0.5rem 0' }}>Home</Link>
-          <Link href="/catalog" onClick={() => setIsMenuOpen(false)} style={{ textDecoration: 'none', color: '#1e293b', fontWeight: 600, padding: '0.5rem 0' }}>Marketplace</Link>
+          <Link href="/" onClick={() => setIsMenuOpen(false)} style={{ textDecoration: 'none', color: 'var(--foreground)', fontWeight: 600, padding: '0.5rem 0' }}>Home</Link>
+          <Link href="/catalog" onClick={() => setIsMenuOpen(false)} style={{ textDecoration: 'none', color: 'var(--foreground)', fontWeight: 600, padding: '0.5rem 0' }}>Marketplace</Link>
           {!user?.is_admin && (
-            <Link href="/orders" onClick={() => setIsMenuOpen(false)} style={{ textDecoration: 'none', color: '#1e293b', fontWeight: 600, padding: '0.5rem 0' }}>My Orders</Link>
+            <Link href="/orders" onClick={() => setIsMenuOpen(false)} style={{ textDecoration: 'none', color: 'var(--foreground)', fontWeight: 600, padding: '0.5rem 0' }}>My Orders</Link>
           )}
           {isAuthenticated && (
-            <Link href="/profile" onClick={() => setIsMenuOpen(false)} style={{ textDecoration: 'none', color: '#1e293b', fontWeight: 600, padding: '0.5rem 0' }}>Profile</Link>
+            <Link href="/profile" onClick={() => setIsMenuOpen(false)} style={{ textDecoration: 'none', color: 'var(--foreground)', fontWeight: 600, padding: '0.5rem 0' }}>Profile</Link>
           )}
           {user?.is_admin && (
             <Link href="/admin/add-product" onClick={() => setIsMenuOpen(false)} style={{ textDecoration: 'none', color: 'var(--primary)', fontWeight: 700, padding: '0.5rem 0' }}>Admin Panel</Link>
@@ -251,10 +309,10 @@ export default function Navbar() {
           border: none; 
           cursor: pointer; 
           padding: 0;
-          color: #334155;
+          color: var(--foreground);
           display: flex;
-          alignItems: center;
-          justifyContent: center;
+          align-items: center;
+          justify-content: center;
           transition: transform 0.2s ease;
         }
         .menu-toggle-btn:active {
@@ -263,7 +321,7 @@ export default function Navbar() {
         
         .nav-link-item {
           text-decoration: none; 
-          color: #475569; 
+          color: var(--badge-text); 
           font-weight: 600;
           font-size: 0.95rem;
           position: relative;
@@ -311,6 +369,16 @@ export default function Navbar() {
         .logout-btn:hover {
           background: #fecaca !important;
           transform: translateY(-1px);
+        }
+
+        .theme-toggle-btn:hover {
+          transform: scale(1.05);
+          border-color: var(--primary-light) !important;
+          color: var(--primary) !important;
+        }
+
+        .theme-toggle-btn:active {
+          transform: scale(0.95);
         }
         
         @keyframes slideDownMenu {

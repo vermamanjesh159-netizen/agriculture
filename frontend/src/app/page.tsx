@@ -19,11 +19,11 @@ export default function Home() {
       
       <VideoShowcase />
 
-      <section style={{ padding: '6rem 2rem', background: '#ffffff' }} className="catalog-section">
+      <section style={{ padding: '6rem 2rem', background: 'var(--background)' }} className="catalog-section">
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ marginBottom: '5rem', textAlign: 'center' }} className="catalog-header">
-            <h2 className="catalog-title" style={{ fontSize: '3.5rem', fontWeight: '800', marginBottom: '1rem', letterSpacing: '-0.02em', color: '#0f172a' }}>Featured Catalog</h2>
-            <p className="catalog-subtitle" style={{ color: '#64748b', fontSize: '1.25rem', maxWidth: '700px', margin: '0 auto' }}>Premium nutrition solutions for every agricultural sector.</p>
+            <h2 className="catalog-title" style={{ fontSize: '3.5rem', fontWeight: '800', marginBottom: '1rem', letterSpacing: '-0.02em', color: 'var(--foreground)' }}>Featured Catalog</h2>
+            <p className="catalog-subtitle" style={{ color: 'var(--foreground)', opacity: 0.8, fontSize: '1.25rem', maxWidth: '700px', margin: '0 auto' }}>Premium nutrition solutions for every agricultural sector.</p>
           </div>
 
           {categories.map((cat) => (

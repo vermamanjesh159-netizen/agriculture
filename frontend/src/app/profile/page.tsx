@@ -67,30 +67,30 @@ export default function ProfilePage() {
             </div>
             <div>
               <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', margin: 0 }}>{profileData?.full_name}</h1>
-              <p style={{ color: '#64748b', fontSize: '1.1rem', margin: '0.25rem 0 0' }}>{profileData?.is_admin ? 'Administrator' : 'Valued Customer'}</p>
+              <p style={{ color: 'var(--foreground)', opacity: 0.8, fontSize: '1.1rem', margin: '0.25rem 0 0' }}>{profileData?.is_admin ? 'Administrator' : 'Valued Customer'}</p>
             </div>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
-            <div className="profile-field" style={{ padding: '1.5rem', background: '#ffffff', borderRadius: '20px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
-              <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', textTransform: 'uppercase', marginBottom: '0.75rem', fontWeight: 700, letterSpacing: '0.05em' }}>Email Address</label>
-              <span style={{ fontSize: '1.05rem', fontWeight: 600, color: '#1e293b', wordBreak: 'break-all' }}>{profileData?.email}</span>
+            <div className="profile-field" style={{ padding: '1.5rem', background: 'var(--card-bg)', borderRadius: '20px', border: '1px solid var(--glass-border)', boxShadow: 'var(--shadow)' }}>
+              <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--foreground)', opacity: 0.7, textTransform: 'uppercase', marginBottom: '0.75rem', fontWeight: 700, letterSpacing: '0.05em' }}>Email Address</label>
+              <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--foreground)', wordBreak: 'break-all' }}>{profileData?.email}</span>
             </div>
-            <div className="profile-field" style={{ padding: '1.5rem', background: '#ffffff', borderRadius: '20px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
-              <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', textTransform: 'uppercase', marginBottom: '0.75rem', fontWeight: 700, letterSpacing: '0.05em' }}>Account Status</label>
-              <span style={{ display: 'inline-flex', alignItems: 'center', padding: '0.25rem 0.75rem', background: profileData?.is_admin ? '#ecfdf5' : '#eff6ff', color: profileData?.is_admin ? '#059669' : '#2563eb', borderRadius: '12px', fontSize: '0.9rem', fontWeight: 700 }}>
+            <div className="profile-field" style={{ padding: '1.5rem', background: 'var(--card-bg)', borderRadius: '20px', border: '1px solid var(--glass-border)', boxShadow: 'var(--shadow)' }}>
+              <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--foreground)', opacity: 0.7, textTransform: 'uppercase', marginBottom: '0.75rem', fontWeight: 700, letterSpacing: '0.05em' }}>Account Status</label>
+              <span style={{ display: 'inline-flex', alignItems: 'center', padding: '0.25rem 0.75rem', background: profileData?.is_admin ? 'rgba(16, 185, 129, 0.15)' : 'rgba(59, 130, 246, 0.15)', color: profileData?.is_admin ? '#10b981' : '#3b82f6', borderRadius: '12px', fontSize: '0.9rem', fontWeight: 700 }}>
                 {profileData?.is_admin ? 'Administrator' : 'Customer'}
               </span>
             </div>
-            <div className="profile-field" style={{ padding: '1.5rem', background: '#ffffff', borderRadius: '20px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
-              <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', textTransform: 'uppercase', marginBottom: '0.75rem', fontWeight: 700, letterSpacing: '0.05em' }}>Member Since</label>
-              <span style={{ fontSize: '1.05rem', fontWeight: 600, color: '#1e293b' }}>{new Date(profileData?.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+            <div className="profile-field" style={{ padding: '1.5rem', background: 'var(--card-bg)', borderRadius: '20px', border: '1px solid var(--glass-border)', boxShadow: 'var(--shadow)' }}>
+              <label style={{ display: 'block', fontSize: '0.75rem', color: 'var(--foreground)', opacity: 0.7, textTransform: 'uppercase', marginBottom: '0.75rem', fontWeight: 700, letterSpacing: '0.05em' }}>Member Since</label>
+              <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--foreground)' }}>{new Date(profileData?.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span>
             </div>
           </div>
 
           <div className="profile-buttons" style={{ marginTop: '3rem', display: 'flex', gap: '1rem' }}>
             <button onClick={() => window.location.href = '/orders'} className="btn-primary" style={{ padding: '1rem 2rem' }}>View Order History</button>
-            <button onClick={logout} style={{ padding: '1rem 2rem', background: 'white', border: '1px solid #fee2e2', color: '#991b1b', borderRadius: '12px', fontWeight: 600, cursor: 'pointer' }}>Sign Out</button>
+            <button onClick={logout} style={{ padding: '1rem 2rem', background: 'var(--card-bg)', border: '1px solid var(--glass-border)', color: '#dc2626', borderRadius: '12px', fontWeight: 600, cursor: 'pointer' }}>Sign Out</button>
           </div>
         </div>
       </div>

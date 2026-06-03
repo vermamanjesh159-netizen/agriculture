@@ -90,7 +90,7 @@ export default function CatalogPage() {
           <h1 className="catalog-page-title" style={{ fontSize: '3rem', fontWeight: '800', marginBottom: '1rem', background: 'linear-gradient(to right, #10b981, #3b82f6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
             Agricultural Marketplace
           </h1>
-          <p style={{ color: '#64748b', fontSize: '1.1rem' }}>Browse our wide range of premium feed and supplements.</p>
+          <p style={{ color: 'var(--foreground)', opacity: 0.8, fontSize: '1.1rem' }}>Browse our wide range of premium feed and supplements.</p>
         </div>
 
         {/* Search Bar */}
@@ -106,9 +106,10 @@ export default function CatalogPage() {
               width: '100%',
               padding: '1.25rem 1.5rem 1.25rem 3.5rem',
               borderRadius: '20px',
-              border: 'none',
-              background: 'white',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+              border: '1px solid var(--glass-border)',
+              background: 'var(--card-bg)',
+              color: 'var(--foreground)',
+              boxShadow: 'var(--shadow)',
               fontSize: '1.1rem',
               outline: 'none',
               transition: 'all 0.3s ease'
@@ -137,10 +138,11 @@ export default function CatalogPage() {
           gap: '1rem', 
           marginBottom: '4rem', 
           flexWrap: 'wrap',
-          background: 'white',
+          background: 'var(--card-bg)',
+          border: '1px solid var(--glass-border)',
           padding: '0.75rem',
           borderRadius: '24px',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.03)'
+          boxShadow: 'var(--shadow)'
         }}>
           {categories.map(cat => (
             <button
@@ -151,7 +153,7 @@ export default function CatalogPage() {
                 borderRadius: '16px',
                 border: 'none',
                 background: activeCategory === cat ? 'var(--primary)' : 'transparent',
-                color: activeCategory === cat ? 'white' : '#64748b',
+                color: activeCategory === cat ? 'white' : 'var(--foreground)',
                 fontWeight: 600,
                 cursor: 'pointer',
                 transition: 'all 0.3s ease'
@@ -170,14 +172,14 @@ export default function CatalogPage() {
           <div>
             <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <h2 style={{ fontSize: '1.5rem', fontWeight: '700' }}>{activeCategory} Products</h2>
-              <span style={{ color: '#94a3b8' }}>{filteredProducts.length} items found</span>
+              <span style={{ color: 'var(--foreground)', opacity: 0.7 }}>{filteredProducts.length} items found</span>
             </div>
             
             <ProductList initialProducts={filteredProducts} showFilters={false} />
             
             {filteredProducts.length === 0 && (
-              <div style={{ textAlign: 'center', padding: '6rem', background: 'white', borderRadius: '32px', border: '2px dashed #e2e8f0' }}>
-                <h3 style={{ color: '#94a3b8', margin: 0 }}>No products found in this category yet.</h3>
+              <div style={{ textAlign: 'center', padding: '6rem', background: 'var(--card-bg)', borderRadius: '32px', border: '2px dashed var(--glass-border)' }}>
+                <h3 style={{ color: 'var(--foreground)', opacity: 0.7, margin: 0 }}>No products found in this category yet.</h3>
               </div>
             )}
           </div>

@@ -158,41 +158,41 @@ export default function OrdersPage() {
                       {/* Left Column: Items & Price Details */}
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                         {/* Section: Order Details (Items) */}
-                        <div style={{ background: 'white', padding: '2rem', borderRadius: '24px', border: '1px solid #f1f5f9', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.02)' }}>
-                          <h4 style={{ textTransform: 'uppercase', fontSize: '0.85rem', color: '#64748b', letterSpacing: '1px', marginBottom: '1.5rem', fontWeight: 700 }}>Order Details (Items)</h4>
+                        <div style={{ background: 'var(--card-bg)', padding: '2rem', borderRadius: '24px', border: '1px solid var(--glass-border)', boxShadow: 'var(--shadow)' }}>
+                          <h4 style={{ textTransform: 'uppercase', fontSize: '0.85rem', color: 'var(--foreground)', opacity: 0.8, letterSpacing: '1px', marginBottom: '1.5rem', fontWeight: 700 }}>Order Details (Items)</h4>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                             {order.items.map((item: any) => (
                               <div key={item.product_id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <div>
-                                  <span style={{ fontWeight: 600, color: '#1e293b', fontSize: '1rem' }}>{item.name}</span>
-                                  <span style={{ color: '#64748b', fontSize: '0.9rem', marginLeft: '0.5rem' }}>x {item.quantity}</span>
+                                  <span style={{ fontWeight: 600, color: 'var(--foreground)', fontSize: '1rem' }}>{item.name}</span>
+                                  <span style={{ color: 'var(--foreground)', opacity: 0.7, fontSize: '0.9rem', marginLeft: '0.5rem' }}>x {item.quantity}</span>
                                   <div style={{ fontSize: '0.75rem', color: item.remaining_stock < 10 ? '#ef4444' : '#10b981', marginTop: '0.25rem' }}>
                                     Stock Availability: {item.remaining_stock} units left
                                   </div>
                                 </div>
-                                <span style={{ fontWeight: 600, color: '#1e293b' }}>₹{item.unit_price * item.quantity}</span>
+                                <span style={{ fontWeight: 600, color: 'var(--foreground)' }}>₹{item.unit_price * item.quantity}</span>
                               </div>
                             ))}
                           </div>
                         </div>
 
                         {/* Section: Price Details */}
-                        <div style={{ background: 'white', padding: '2rem', borderRadius: '24px', border: '1px solid #f1f5f9', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.02)' }}>
-                          <h4 style={{ textTransform: 'uppercase', fontSize: '0.85rem', color: '#64748b', letterSpacing: '1px', marginBottom: '1.5rem', fontWeight: 700 }}>Price Details</h4>
+                        <div style={{ background: 'var(--card-bg)', padding: '2rem', borderRadius: '24px', border: '1px solid var(--glass-border)', boxShadow: 'var(--shadow)' }}>
+                          <h4 style={{ textTransform: 'uppercase', fontSize: '0.85rem', color: 'var(--foreground)', opacity: 0.8, letterSpacing: '1px', marginBottom: '1.5rem', fontWeight: 700 }}>Price Details</h4>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#64748b', fontSize: '0.95rem' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--foreground)', opacity: 0.8, fontSize: '0.95rem' }}>
                               <span>Subtotal</span>
                               <span>₹{(order.subtotal || (order.total_amount - (order.shipping_charges || 50) - (order.tax || 0))).toLocaleString()}</span>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#64748b', fontSize: '0.95rem' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--foreground)', opacity: 0.8, fontSize: '0.95rem' }}>
                               <span>Shipping Charges</span>
                               <span>₹{(order.shipping_charges || 50).toLocaleString()}</span>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#64748b', fontSize: '0.95rem' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--foreground)', opacity: 0.8, fontSize: '0.95rem' }}>
                               <span>Estimated Tax (5%)</span>
                               <span>₹{(order.tax || (order.total_amount * 0.05)).toLocaleString()}</span>
                             </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px dashed #e2e8f0', color: '#10b981' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px dashed var(--glass-border)', color: '#10b981' }}>
                               <span>Total Amount Paid</span>
                               <span>₹{order.total_amount.toLocaleString()}</span>
                             </div>
@@ -203,18 +203,18 @@ export default function OrdersPage() {
                       {/* Right Column: Delivery Details & Help/Support */}
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                         {/* Section: Delivery Details */}
-                        <div style={{ padding: '2rem', background: '#f8fafc', borderRadius: '24px', border: '1px solid #cbd5e1', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.02)' }}>
-                          <h4 style={{ textTransform: 'uppercase', fontSize: '0.85rem', color: '#475569', letterSpacing: '1px', marginBottom: '1.5rem', fontWeight: 700 }}>Delivery Details</h4>
+                        <div style={{ padding: '2rem', background: 'var(--badge-bg)', borderRadius: '24px', border: '1px solid var(--glass-border)', boxShadow: 'var(--shadow)' }}>
+                          <h4 style={{ textTransform: 'uppercase', fontSize: '0.85rem', color: 'var(--foreground)', opacity: 0.8, letterSpacing: '1px', marginBottom: '1.5rem', fontWeight: 700 }}>Delivery Details</h4>
                           {order.shipping_address ? (
-                            <div style={{ fontSize: '0.95rem', color: '#1e293b', lineHeight: '1.7' }}>
-                              <p style={{ margin: 0, fontWeight: 700, fontSize: '1.05rem', color: '#0f172a' }}>{order.customer_name}</p>
+                            <div style={{ fontSize: '0.95rem', color: 'var(--foreground)', lineHeight: '1.7' }}>
+                              <p style={{ margin: 0, fontWeight: 700, fontSize: '1.05rem', color: 'var(--foreground)' }}>{order.customer_name}</p>
                               <p style={{ margin: '0.5rem 0 0.25rem' }}>{order.shipping_address.address_line}</p>
                               <p style={{ margin: '0.25rem 0' }}>{order.shipping_address.city}, {order.shipping_address.state}</p>
                               <p style={{ margin: '0.25rem 0 0.75rem' }}>PIN: <span style={{ fontWeight: 600 }}>{order.shipping_address.pincode}</span></p>
                               
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.75rem', padding: '0.5rem 0.75rem', background: 'white', borderRadius: '12px', width: 'fit-content', border: '1px solid #e2e8f0' }}>
-                                <span style={{ fontSize: '0.9rem' }}>📞 Phone:</span>
-                                <span style={{ fontWeight: 600, color: '#334155' }}>{order.shipping_address.phone}</span>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.75rem', padding: '0.5rem 0.75rem', background: 'var(--card-bg)', borderRadius: '12px', width: 'fit-content', border: '1px solid var(--glass-border)' }}>
+                                <span style={{ fontSize: '0.9rem', opacity: 0.8 }}>📞 Phone:</span>
+                                <span style={{ fontWeight: 600, color: 'var(--foreground)' }}>{order.shipping_address.phone}</span>
                               </div>
                               
                               <div style={{ marginTop: '1.25rem', padding: '0.75rem 1rem', background: '#f0fdf4', borderRadius: '12px', border: '1px solid #bbf7d0', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
@@ -223,14 +223,14 @@ export default function OrdersPage() {
                               </div>
                             </div>
                           ) : (
-                            <p style={{ color: '#64748b', fontSize: '0.85rem' }}>No delivery address provided.</p>
+                            <p style={{ color: 'var(--foreground)', opacity: 0.6, fontSize: '0.85rem' }}>No delivery address provided.</p>
                           )}
                         </div>
 
                         {/* Section: Need Help / Support */}
-                        <div style={{ padding: '2rem', background: 'rgba(255,255,255,0.4)', backdropFilter: 'blur(8px)', borderRadius: '24px', border: '1px dashed #cbd5e1' }}>
-                          <h4 style={{ fontSize: '1rem', fontWeight: 'bold', color: '#0f172a', marginBottom: '0.5rem' }}>Need Support?</h4>
-                          <p style={{ color: '#475569', fontSize: '0.85rem', lineHeight: '1.5', marginBottom: '1.25rem' }}>
+                        <div style={{ padding: '2rem', background: 'var(--card-bg)', borderRadius: '24px', border: '1px dashed var(--glass-border)' }}>
+                          <h4 style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--foreground)', marginBottom: '0.5rem' }}>Need Support?</h4>
+                          <p style={{ color: 'var(--foreground)', opacity: 0.7, fontSize: '0.85rem', lineHeight: '1.5', marginBottom: '1.25rem' }}>
                             Have questions about this order, feed products, or delivery tracking? Contact our 24/7 AgriFeed helpdesk.
                           </p>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -245,7 +245,7 @@ export default function OrdersPage() {
                       </div>
                     </div>
 
-                    <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid #f1f5f9', color: '#94a3b8', fontSize: '0.85rem' }}>
+                    <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--glass-border)', color: 'var(--foreground)', opacity: 0.6, fontSize: '0.85rem' }}>
                       Placed on: {formatDate(order.created_at)}
                     </div>
                   </div>
@@ -253,8 +253,8 @@ export default function OrdersPage() {
               })
             ) : (
               searched && (
-                <div style={{ textAlign: 'center', padding: '6rem', background: 'white', borderRadius: '32px' }}>
-                  <h3 style={{ color: '#94a3b8' }}>No orders found for this account.</h3>
+                <div style={{ textAlign: 'center', padding: '6rem', background: 'var(--card-bg)', border: '1px solid var(--glass-border)', borderRadius: '32px' }}>
+                  <h3 style={{ color: 'var(--foreground)', opacity: 0.6 }}>No orders found for this account.</h3>
                 </div>
               )
             )}

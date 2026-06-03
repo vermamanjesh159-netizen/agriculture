@@ -52,7 +52,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
       return [...prev, { id: product.id, name: product.name, price: product.price, quantity: 1, image_url: product.image_url }];
     });
-    setCartOpen(true); // Open cart automatically when adding
   };
 
   const removeFromCart = (id: number) => {

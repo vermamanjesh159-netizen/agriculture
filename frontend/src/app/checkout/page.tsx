@@ -77,135 +77,136 @@ function CheckoutContent() {
     appearance,
   };
 
-  return (
-    <div className="checkout-container" style={{ 
-      maxWidth: '1200px', 
-      margin: '0 auto', 
-      padding: '8rem 2rem 4rem',
-      display: 'grid',
-      gridTemplateColumns: '1.2fr 0.8fr',
-      gap: '4rem'
-    }}>
-      
-      {loading ? (
-        <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '4rem' }}>
-          <div className="spinner-large" style={{ margin: '0 auto' }} />
-          <p style={{ marginTop: '1.5rem', fontSize: '1.1rem', color: '#94a3b8' }}>Securing your transaction...</p>
-        </div>
-      ) : error ? (
-        <div style={{ gridColumn: '1 / -1', background: 'rgba(248, 113, 113, 0.1)', border: '1px solid #f87171', color: '#f87171', padding: '2rem', borderRadius: '16px', textAlign: 'center' }}>
-          <h2>Something went wrong</h2>
-          <p>{error}</p>
-          <button onClick={() => window.location.href = '/'} style={{ marginTop: '1.5rem', background: '#f87171', color: 'white', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 600 }}>Return to Shop</button>
-        </div>
-      ) : (
-        <>
-          {/* Left Column: Payment */}
-          <div className="payment-section">
-            <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Payment Method</h2>
-            <p style={{ color: '#94a3b8', marginBottom: '2.5rem' }}>All transactions are secure and encrypted.</p>
-            
-            {clientSecret && (
-              <Elements options={options} stripe={stripePromise}>
-                <CheckoutForm orderId={parseInt(orderId!)} amount={order?.total_amount || 0} />
-              </Elements>
-            )}
+    return (
+      <div className="checkout-container" style={{ 
+        maxWidth: '1200px', 
+        margin: '0 auto', 
+        padding: '8rem 2rem 4rem',
+        display: 'grid',
+        gridTemplateColumns: '1.2fr 0.8fr',
+        gap: '4rem'
+      }}>
+        
+        {loading ? (
+          <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '4rem' }}>
+            <div className="spinner-large" style={{ margin: '0 auto' }} />
+            <p style={{ marginTop: '1.5rem', fontSize: '1.1rem', color: 'var(--foreground)', opacity: 0.7 }}>Securing your transaction...</p>
           </div>
-
-          {/* Right Column: Order Summary */}
-          <div className="order-summary-section" style={{ 
-            background: 'rgba(255,255,255,0.03)', 
-            padding: '2.5rem', 
-            borderRadius: '24px', 
-            border: '1px solid rgba(255,255,255,0.05)',
-            height: 'fit-content'
-          }}>
-            <h3 style={{ fontSize: '1.5rem', marginBottom: '2rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1rem' }}>Order Summary</h3>
-            
-            <div className="items-list" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '2rem' }}>
-              {order?.items.map((item: any, idx: number) => (
-                <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div>
-                    <h4 style={{ margin: 0, fontSize: '1rem' }}>{item.name}</h4>
-                    <p style={{ margin: '0.25rem 0 0', color: '#94a3b8', fontSize: '0.85rem' }}>Qty: {item.quantity}</p>
+        ) : error ? (
+          <div style={{ gridColumn: '1 / -1', background: 'rgba(248, 113, 113, 0.1)', border: '1px solid #f87171', color: '#f87171', padding: '2rem', borderRadius: '16px', textAlign: 'center' }}>
+            <h2>Something went wrong</h2>
+            <p>{error}</p>
+            <button onClick={() => window.location.href = '/'} style={{ marginTop: '1.5rem', background: '#f87171', color: 'white', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 600 }}>Return to Shop</button>
+          </div>
+        ) : (
+          <>
+            {/* Left Column: Payment */}
+            <div className="payment-section">
+              <h2 style={{ fontSize: '2rem', marginBottom: '0.5rem', color: 'var(--foreground)' }}>Payment Method</h2>
+              <p style={{ color: 'var(--foreground)', opacity: 0.7, marginBottom: '2.5rem' }}>All transactions are secure and encrypted.</p>
+              
+              {clientSecret && (
+                <Elements options={options} stripe={stripePromise}>
+                  <CheckoutForm orderId={parseInt(orderId!)} amount={order?.total_amount || 0} />
+                </Elements>
+              )}
+            </div>
+  
+            {/* Right Column: Order Summary */}
+            <div className="order-summary-section" style={{ 
+              background: 'var(--card-bg)', 
+              padding: '2.5rem', 
+              borderRadius: '24px', 
+              border: '1px solid var(--glass-border)',
+              boxShadow: 'var(--shadow)',
+              height: 'fit-content'
+            }}>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '2rem', borderBottom: '1px solid var(--glass-border)', paddingBottom: '1rem', color: 'var(--foreground)' }}>Order Summary</h3>
+              
+              <div className="items-list" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '2rem' }}>
+                {order?.items.map((item: any, idx: number) => (
+                  <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--foreground)' }}>
+                    <div>
+                      <h4 style={{ margin: 0, fontSize: '1rem' }}>{item.name}</h4>
+                      <p style={{ margin: '0.25rem 0 0', color: 'var(--foreground)', opacity: 0.7, fontSize: '0.85rem' }}>Qty: {item.quantity}</p>
+                    </div>
+                    <span style={{ fontWeight: 600 }}>₹{(item.unit_price * item.quantity).toLocaleString()}</span>
                   </div>
-                  <span style={{ fontWeight: 600 }}>₹{(item.unit_price * item.quantity).toLocaleString()}</span>
+                ))}
+              </div>
+  
+              <div className="price-breakdown" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingTop: '1.5rem', borderTop: '1px solid var(--glass-border)', color: 'var(--foreground)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--foreground)', opacity: 0.7 }}>
+                  <span>Subtotal</span>
+                  <span>₹{order?.total_amount.toLocaleString()}</span>
                 </div>
-              ))}
+                <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--foreground)', opacity: 0.7 }}>
+                  <span>Shipping</span>
+                  <span>₹{order?.shipping_charges.toLocaleString()}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--foreground)', opacity: 0.7 }}>
+                  <span>Tax (5%)</span>
+                  <span>₹{order?.tax.toLocaleString()}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.5rem', fontWeight: 'bold', marginTop: '1rem', color: '#10b981' }}>
+                  <span>Total</span>
+                  <span>₹{order?.total_amount.toLocaleString()}</span>
+                </div>
+              </div>
+  
+              {order?.shipping_address && (
+                <div className="shipping-info" style={{ marginTop: '2.5rem', paddingTop: '1.5rem', borderTop: '1px solid var(--glass-border)', color: 'var(--foreground)' }}>
+                  <h4 style={{ marginBottom: '0.75rem', color: 'var(--foreground)', opacity: 0.7, fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Shipping To</h4>
+                  <p style={{ margin: 0, fontSize: '0.95rem' }}>{order.customer_name}</p>
+                  <p style={{ margin: '0.25rem 0 0', fontSize: '0.9rem', color: 'var(--foreground)', opacity: 0.7 }}>{order.shipping_address.address_line}, {order.shipping_address.city}</p>
+                  <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--foreground)', opacity: 0.7 }}>{order.shipping_address.state} - {order.shipping_address.pincode}</p>
+                </div>
+              )}
             </div>
-
-            <div className="price-breakdown" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94a3b8' }}>
-                <span>Subtotal</span>
-                <span>₹{order?.total_amount.toLocaleString()}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94a3b8' }}>
-                <span>Shipping</span>
-                <span>₹{order?.shipping_charges.toLocaleString()}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: '#94a3b8' }}>
-                <span>Tax (5%)</span>
-                <span>₹{order?.tax.toLocaleString()}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.5rem', fontWeight: 'bold', marginTop: '1rem', color: '#10b981' }}>
-                <span>Total</span>
-                <span>₹{order?.total_amount.toLocaleString()}</span>
-              </div>
-            </div>
-
-            {order?.shipping_address && (
-              <div className="shipping-info" style={{ marginTop: '2.5rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-                <h4 style={{ marginBottom: '0.75rem', color: '#94a3b8', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Shipping To</h4>
-                <p style={{ margin: 0, fontSize: '0.95rem' }}>{order.customer_name}</p>
-                <p style={{ margin: '0.25rem 0 0', fontSize: '0.9rem', color: '#94a3b8' }}>{order.shipping_address.address_line}, {order.shipping_address.city}</p>
-                <p style={{ margin: 0, fontSize: '0.9rem', color: '#94a3b8' }}>{order.shipping_address.state} - {order.shipping_address.pincode}</p>
-              </div>
-            )}
+          </>
+        )}
+      </div>
+    );
+  }
+  
+  export default function CheckoutPage() {
+    return (
+      <main style={{ minHeight: '100vh', background: 'var(--background)', color: 'var(--foreground)' }}>
+        <Navbar />
+        
+        <Suspense fallback={
+          <div style={{ textAlign: 'center', padding: '8rem 2rem 4rem' }}>
+            <div className="spinner-large" style={{ margin: '0 auto' }} />
+            <p style={{ marginTop: '1.5rem', fontSize: '1.1rem', color: 'var(--foreground)', opacity: 0.7 }}>Loading Checkout...</p>
           </div>
-        </>
-      )}
-    </div>
-  );
-}
-
-export default function CheckoutPage() {
-  return (
-    <main style={{ minHeight: '100vh', background: '#0f172a', color: 'white' }}>
-      <Navbar />
-      
-      <Suspense fallback={
-        <div style={{ textAlign: 'center', padding: '8rem 2rem 4rem' }}>
-          <div className="spinner-large" style={{ margin: '0 auto' }} />
-          <p style={{ marginTop: '1.5rem', fontSize: '1.1rem', color: '#94a3b8' }}>Loading Checkout...</p>
-        </div>
-      }>
-        <CheckoutContent />
-      </Suspense>
-
-      <style jsx global>{`
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        .spinner-large {
-          width: 50px;
-          height: 50px;
-          border: 4px solid rgba(255,255,255,0.1);
-          border-top: 4px solid #10b981;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-        }
-        @media (max-width: 1024px) {
-          .checkout-container {
-            grid-template-columns: 1fr !important;
-            gap: 3rem !important;
-            padding-top: 6rem !important;
+        }>
+          <CheckoutContent />
+        </Suspense>
+  
+        <style jsx global>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
           }
-          .order-summary-section {
-            order: -1; /* Show summary first on mobile */
+          .spinner-large {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--glass-border);
+            border-top: 4px solid #10b981;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
           }
-        }
-      `}</style>
-    </main>
-  );
-}
+          @media (max-width: 1024px) {
+            .checkout-container {
+              grid-template-columns: 1fr !important;
+              gap: 3rem !important;
+              padding-top: 6rem !important;
+            }
+            .order-summary-section {
+              order: -1; /* Show summary first on mobile */
+            }
+          }
+        `}</style>
+      </main>
+    );
+  }

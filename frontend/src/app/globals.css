@@ -5,24 +5,66 @@
   --accent: #f4a261;
   --background: #fdfaf6;
   --foreground: #1a1a1a;
-  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-bg: rgba(255, 255, 255, 0.85);
   --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
+  --border-color: #e2e8f0;
+  --input-bg: #ffffff;
+  --badge-bg: #f1f5f9;
+  --badge-text: #475569;
+}
+
+[data-theme="light"] {
+  --primary: #2d5a27;
+  --primary-light: #4a8c44;
+  --secondary: #8b5e3c;
+  --accent: #f4a261;
+  --background: #fdfaf6;
+  --foreground: #1a1a1a;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
+  --border-color: #e2e8f0;
+  --input-bg: #ffffff;
+  --badge-bg: #f1f5f9;
+  --badge-text: #475569;
+}
+
+[data-theme="dark"] {
+  --primary: #4a8c44;
+  --primary-light: #6eb563;
+  --secondary: #a67c52;
+  --accent: #f4a261;
+  --background: #0f1710;
+  --foreground: #f0f0f0;
+  --card-bg: rgba(20, 30, 20, 0.75);
+  --glass-bg: rgba(0, 0, 0, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --border-color: #2a3a2a;
+  --input-bg: #152216;
+  --badge-bg: #1c2e1d;
+  --badge-text: #cbd5e1;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  html:not([data-theme="light"]) {
     --primary: #4a8c44;
     --primary-light: #6eb563;
     --secondary: #a67c52;
     --accent: #f4a261;
     --background: #0f1710;
     --foreground: #f0f0f0;
-    --card-bg: rgba(20, 30, 20, 0.6);
-    --glass-bg: rgba(0, 0, 0, 0.3);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    --card-bg: rgba(20, 30, 20, 0.75);
+    --glass-bg: rgba(0, 0, 0, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    --border-color: #2a3a2a;
+    --input-bg: #152216;
+    --badge-bg: #1c2e1d;
+    --badge-text: #cbd5e1;
   }
 }
 

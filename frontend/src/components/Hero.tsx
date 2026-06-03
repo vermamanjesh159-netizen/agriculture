@@ -12,7 +12,7 @@ export default function Hero() {
       alignItems: 'center',
       textAlign: 'center',
       padding: '2rem',
-      background: '#f7f7f0', // Soft creamy background as per screenshot
+      background: 'var(--background)',
       position: 'relative',
       overflow: 'hidden'
     }}>
@@ -22,8 +22,8 @@ export default function Hero() {
         left: 0,
         right: 0,
         bottom: 0,
-        background: 'radial-gradient(circle at 50% 50%, #10b981, transparent)',
-        opacity: 0.05,
+        background: 'radial-gradient(circle at 50% 50%, var(--primary-light), transparent)',
+        opacity: 0.08,
         zIndex: -1
       }}></div>
       
@@ -31,18 +31,19 @@ export default function Hero() {
         fontSize: '4.5rem',
         fontWeight: '800',
         marginBottom: '1.5rem',
-        color: '#2d4a22', // Dark earthy green
+        color: 'var(--foreground)',
         letterSpacing: '-0.02em',
         lineHeight: '1.1'
       }}>
-        Premium Feed for Your <span style={{ color: '#8b5e3c' }}>Livestock</span>
+        Premium Feed for Your <span style={{ color: 'var(--secondary)' }}>Livestock</span>
       </h1>
       
       <p className="hero-subtitle animate-fade-in" style={{
         fontSize: '1.4rem',
         maxWidth: '700px',
         marginBottom: '2.5rem',
-        color: '#4a5568',
+        color: 'var(--foreground)',
+        opacity: 0.8,
         lineHeight: '1.6'
       }}>
         Digitized agricultural marketplace connecting you with nutrient-rich, lab-tested animal feed concentrates, roughages, and minerals.
@@ -64,24 +65,25 @@ export default function Hero() {
         flexWrap: 'wrap', 
         justifyContent: 'center',
         padding: '1.5rem 3rem',
-        background: 'rgba(255,255,255,0.5)',
+        background: 'var(--card-bg)',
         borderRadius: '50px',
-        border: '1px solid rgba(0,0,0,0.05)'
+        border: '1px solid var(--glass-border)',
+        boxShadow: 'var(--shadow)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#2d4a22', fontWeight: 600 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--foreground)', fontWeight: 600 }}>
           <span style={{ color: '#10b981' }}>✓</span> Optimize Your Herd Today
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#2d4a22', fontWeight: 600 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--foreground)', fontWeight: 600 }}>
           <span style={{ color: '#10b981' }}>✓</span> View Full Nutritional Profiles
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#2d4a22', fontWeight: 600 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--foreground)', fontWeight: 600 }}>
           <span style={{ color: '#10b981' }}>✓</span> Calculate Your Bulk Savings
         </div>
       </div>
 
       <style jsx>{`
         .btn-custom-green {
-          background: #2d4a22;
+          background: var(--primary);
           color: white;
           padding: 1rem 2rem;
           border-radius: 12px;
@@ -89,11 +91,11 @@ export default function Hero() {
           font-weight: 700;
           cursor: pointer;
           font-size: 1rem;
-          transition: transform 0.2s;
-          box-shadow: 0 4px 15px rgba(45, 74, 34, 0.3);
+          transition: transform 0.2s, background-color 0.2s;
+          box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
         }
         .btn-custom-brown {
-          background: #8b5e3c;
+          background: var(--secondary);
           color: white;
           padding: 1rem 2rem;
           border-radius: 12px;
@@ -101,11 +103,16 @@ export default function Hero() {
           font-weight: 700;
           cursor: pointer;
           font-size: 1rem;
-          transition: transform 0.2s;
-          box-shadow: 0 4px 15px rgba(139, 94, 60, 0.3);
+          transition: transform 0.2s, background-color 0.2s;
+          box-shadow: 0 4px 15px rgba(139, 94, 60, 0.2);
         }
-        .btn-custom-green:hover, .btn-custom-brown:hover {
+        .btn-custom-green:hover {
+          background: var(--primary-light);
           transform: translateY(-2px);
+        }
+        .btn-custom-brown:hover {
+          transform: translateY(-2px);
+          opacity: 0.95;
         }
         .animate-btn:active {
           transform: translateY(0);

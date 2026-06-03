@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 
 import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
-import CartDrawer from "@/components/CartDrawer";
 import Footer from "@/components/Footer";
 import ChatAssistant from "@/components/ChatAssistant";
 
@@ -19,16 +18,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+        <script dangerouslySetInnerHTML={{__html: `
+          (function() {
+            var theme = localStorage.getItem('theme');
+            if (theme === 'dark' || theme === 'light') {
+              document.documentElement.setAttribute('data-theme', theme);
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+              document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+              document.documentElement.setAttribute('data-theme', 'light');
+            }
+          })();
+        `}} />
       </head>
       <body>
         <AuthProvider>
           <CartProvider>
-            <CartDrawer />
             <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
               <div style={{ flex: 1 }}>
                 {children}
