@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { getApiUrl } from '@/config';
 
 export default function CatalogPage() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, loading: authLoading } = useAuth();
   const router = useRouter();
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
@@ -16,13 +16,13 @@ export default function CatalogPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!authLoading && !isAuthenticated) {
       router.push('/login');
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, authLoading, router]);
 
   useEffect(() => {
-    if (!isAuthenticated) return;
+    if (authLoading || !isAuthenticated) return;
 
     const fetchData = async () => {
       try {
@@ -49,13 +49,13 @@ export default function CatalogPage() {
     };
 
     fetchData();
-  }, [isAuthenticated]);
+  }, [isAuthenticated, authLoading]);
 
   const filteredProducts = activeCategory === 'All' 
     ? products 
     : products.filter(p => p.category === activeCategory);
 
-  if (!isAuthenticated) {
+  if (authLoading || !isAuthenticated) {
     return (
       <main style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'var(--background)' }}>
         <div style={{ textAlign: 'center' }}>

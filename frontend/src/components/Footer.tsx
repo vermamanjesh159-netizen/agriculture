@@ -2,8 +2,10 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/context/AuthContext';
 
 export default function Footer() {
+  const { isAuthenticated } = useAuth();
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -90,8 +92,13 @@ export default function Footer() {
           <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
             <li><Link href="/" className="footer-link-item">Home Platform</Link></li>
             <li><Link href="/catalog" className="footer-link-item">Marketplace Catalog</Link></li>
-            <li><Link href="/orders" className="footer-link-item">Track My Orders</Link></li>
-            <li><Link href="/profile" className="footer-link-item">Account Settings</Link></li>
+            <li><Link href="/about" className="footer-link-item">About AgriFeed</Link></li>
+            {isAuthenticated && (
+              <li><Link href="/orders" className="footer-link-item">Track My Orders</Link></li>
+            )}
+            {isAuthenticated && (
+              <li><Link href="/profile" className="footer-link-item">Account Settings</Link></li>
+            )}
           </ul>
         </div>
 

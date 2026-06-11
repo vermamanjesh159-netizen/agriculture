@@ -103,9 +103,10 @@ export default function Navbar() {
       <div className="nav-links desktop-only" style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
         <Link href="/" className={`nav-link-item ${pathname === '/' ? 'active' : ''}`}>Home</Link>
         <Link href="/catalog" className={`nav-link-item ${pathname.startsWith('/catalog') ? 'active' : ''}`}>Marketplace</Link>
-        {!user?.is_admin && (
+        {isAuthenticated && !user?.is_admin && (
           <Link href="/orders" className={`nav-link-item ${pathname.startsWith('/orders') ? 'active' : ''}`}>My Orders</Link>
         )}
+        <Link href="/about" className={`nav-link-item ${pathname.startsWith('/about') ? 'active' : ''}`}>About Us</Link>
         {isAuthenticated && (
           <Link href="/profile" className={`nav-link-item ${pathname.startsWith('/profile') ? 'active' : ''}`}>Profile</Link>
         )}
@@ -290,9 +291,10 @@ export default function Navbar() {
           )}
           <Link href="/" onClick={() => setIsMenuOpen(false)} style={{ textDecoration: 'none', color: 'var(--foreground)', fontWeight: 600, padding: '0.5rem 0' }}>Home</Link>
           <Link href="/catalog" onClick={() => setIsMenuOpen(false)} style={{ textDecoration: 'none', color: 'var(--foreground)', fontWeight: 600, padding: '0.5rem 0' }}>Marketplace</Link>
-          {!user?.is_admin && (
+          {isAuthenticated && !user?.is_admin && (
             <Link href="/orders" onClick={() => setIsMenuOpen(false)} style={{ textDecoration: 'none', color: 'var(--foreground)', fontWeight: 600, padding: '0.5rem 0' }}>My Orders</Link>
           )}
+          <Link href="/about" onClick={() => setIsMenuOpen(false)} style={{ textDecoration: 'none', color: 'var(--foreground)', fontWeight: 600, padding: '0.5rem 0' }}>About Us</Link>
           {isAuthenticated && (
             <Link href="/profile" onClick={() => setIsMenuOpen(false)} style={{ textDecoration: 'none', color: 'var(--foreground)', fontWeight: 600, padding: '0.5rem 0' }}>Profile</Link>
           )}

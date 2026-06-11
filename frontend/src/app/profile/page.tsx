@@ -7,11 +7,12 @@ import Navbar from '@/components/Navbar';
 import { getApiUrl } from '@/config';
 
 export default function ProfilePage() {
-  const { user, token, logout } = useAuth();
+  const { user, token, logout, loading: authLoading } = useAuth();
   const [profileData, setProfileData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (authLoading) return;
     if (!token) {
       window.location.href = '/login';
       return;
@@ -37,9 +38,9 @@ export default function ProfilePage() {
     };
 
     fetchProfile();
-  }, [token]);
+  }, [token, authLoading]);
 
-  if (loading) return (
+  if (authLoading || loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', background: 'var(--background)' }}>
       <div className="spinner-large" />
     </div>
